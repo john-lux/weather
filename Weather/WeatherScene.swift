@@ -8,20 +8,43 @@
 import SwiftUI
 
 struct WeatherScene: View {
+    
+    @StateObject var viewModel = ViewModel()
+    
     var body: some View {
-        VStack(spacing: 8.0) {
-            TitleSubtitleCell(
-                text: Text("19°C"),
-                detailText: Text("Now")
-            )
-            TitleSubtitleCell(
-                text: Text("15°C"),
-                detailText: Text("Min")
-            )
-            TitleSubtitleCell(
-                text: Text("22°C"),
-                detailText: Text("Max")
-            )
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 8.0) {
+                    TextField(
+                        viewModel.textFieldPlaceHolder,
+                        text: $viewModel.searchString
+                    )
+                        .textFieldStyle(.roundedBorder)
+                    fetchButton
+                    ForEach(viewModel.cells) { cell in
+                        TitleSubtitleCell(
+                            text: Text(cell.title),
+                            detailText: Text(cell.subtitle)
+                        )
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("Weather")
+            .alert(item: $viewModel.alert) { alert in
+                Alert(
+                    title: Text(alert.title),
+                    message: Text(alert.message)
+                )
+            }
+        }
+    }
+    
+    var fetchButton: some View {
+        Button(viewModel.buttonTitle) {
+            withAnimation {
+                viewModel.fetch()
+            }
         }
     }
 }

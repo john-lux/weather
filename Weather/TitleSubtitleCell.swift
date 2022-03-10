@@ -20,6 +20,10 @@ struct TitleSubtitleCell: View {
                 .font(.callout)
                 .foregroundColor(.secondary)
         }
+        .padding(16)
+        .background(Color(.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .shadow(radius: 8)
     }
 }
 
@@ -29,6 +33,7 @@ struct TitleSubtitleCell_Previews: PreviewProvider {
             text: Text("19°C"),
             detailText: Text("Now")
         )
-            .previewLayout(.sizeThatFits)
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }
