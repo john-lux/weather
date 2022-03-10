@@ -21,9 +21,6 @@ struct TitleSubtitleCell: View {
                 .foregroundColor(.secondary)
         }
         .padding(16)
-        .background(Color(.systemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 8))
-        .shadow(radius: 8)
     }
 }
 
